@@ -1,29 +1,41 @@
-/* 1) Tailwind V4 aktivieren – muss als erstes kommen */
 @import "tailwindcss";
 
-/* 2) Global (ohne @apply) */
+/* Grundsetup */
 html, body {
-  background:#000;
-  color:#fff;
-  scroll-behavior:smooth;
+  background: #000;
+  color: #fff;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Canvas & Layering */
-#bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-.layer     { position: relative; z-index: 1; }
+/* Canvas nur innerhalb des Hero-Bereichs */
+#bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
 
-/* Glasslinie Header */
-.header-glass { box-shadow: 0 6px 30px rgba(255,255,255,.06) inset, 0 4px 40px rgba(0,0,0,.5); }
+.layer { position: relative; z-index: 1; }
 
-/* 3) Alles mit @apply gehört in einen Tailwind-Layer */
+.header-glass {
+  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.06) inset,
+              0 4px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Tailwind-Komponenten Layer */
 @layer components {
   .pill {
     @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5
            px-4 py-2 text-sm font-medium text-white/90 transition;
   }
-  .pill:hover { @apply bg-white/10 border-white/25; }
+
+  .pill:hover {
+    @apply bg-white/10 border-white/25;
+  }
 
   .hero-title {
     @apply font-black leading-[0.95] tracking-[-0.02em];
