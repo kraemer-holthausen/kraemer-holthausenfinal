@@ -38,16 +38,14 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-3">
           {nav.map((n) => (
             <a key={n.href} href={n.href} className="pill">
-              {n.label}
-              <span className="text-white/40">▾</span>
+              {n.label} <span className="text-white/40">▾</span>
             </a>
           ))}
         </nav>
 
-        {/* Right side CTA */}
-        <a href="#kontakt" className="hidden md:inline-flex pill bg-white text-black border-white px-4 py-2">
-          Kontakt
-          <span>→</span>
+        {/* Right CTA */}
+        <a href="#kontakt" className="hidden md:inline-flex pill bg-white text-black border-white">
+          Kontakt →
         </a>
 
         {/* Mobile burger */}
