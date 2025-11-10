@@ -2,17 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  scroll-behavior: smooth;
-  background-color: #ffffff;
-  color: #171717;
+/* Basistypo */
+html, body { color: #0a0a0a; background:#fff; }
+::selection { background: rgba(14,165,233,.25); }
+
+/* Container-Breite feinjustieren */
+@media (min-width: 1280px){
+  .max-w-6xl { max-width: 1152px; }
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-header {
-  transition: background-color 0.3s, backdrop-filter 0.3s;
-}
+/* Kleine, sanfte Card-Schatten überall konsistent */
+.shadow-sm { box-shadow: 0 1px 1px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04); }
+.hover\:shadow-md:hover { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
