@@ -2,15 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Basistypo */
-html, body { color: #0a0a0a; background:#fff; }
-::selection { background: rgba(14,165,233,.25); }
+/* Dark look & smooth scrolling */
+html, body { background:#000; color:#fff; scroll-behavior:smooth; }
 
-/* Container-Breite feinjustieren */
-@media (min-width: 1280px){
-  .max-w-6xl { max-width: 1152px; }
+.pill {
+  @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-medium text-white/90 transition;
+}
+.pill:hover { @apply bg-white/10 border-white/25; }
+
+/* Big hero type with tight tracking */
+.hero-title {
+  @apply font-black leading-[0.95] tracking-[-0.02em];
+  font-size: clamp(42px, 7vw, 112px);
 }
 
-/* Kleine, sanfte Card-Schatten überall konsistent */
-.shadow-sm { box-shadow: 0 1px 1px rgba(0,0,0,.05), 0 2px 8px rgba(0,0,0,.04); }
-.hover\:shadow-md:hover { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+/* Subtle glass header shadow */
+.header-glass { box-shadow: 0 6px 30px rgba(255,255,255,.06) inset, 0 4px 40px rgba(0,0,0,.5); }
+
+/* Starfield canvas should not intercept clicks */
+#starfield { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+/* Ensure content floats above bg */
+.layer { position: relative; z-index: 1; }
