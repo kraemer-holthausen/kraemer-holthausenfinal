@@ -1,44 +1,24 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Grundsetup */
-html, body {
-  background: #000;
-  color: #fff;
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+/* Logo – sanft wackeln + Hover-Reveal */
+@keyframes kh-logo-float {
+  0%,100% { transform: translate3d(0,0,0) rotate(0deg); }
+  50%     { transform: translate3d(1.6px,-1.6px,0) rotate(.15deg); }
 }
+.kh-logo__wiggle { animation: kh-logo-float 4.8s ease-in-out infinite; will-change: transform; }
 
-/* Canvas nur innerhalb des Hero-Bereichs */
-#bg-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
+/* Reveal „HOLTHAUSEN“ + Subline nur bei Hover */
+.kh-logo { line-height: .92; font-weight: 800; letter-spacing: .06em; }
+.kh-logo__second, .kh-logo__sub { opacity: 0; transform: translateY(4px); transition: .28s ease; }
+.kh-logo:hover .kh-logo__second, .kh-logo:hover .kh-logo__sub { opacity: 1; transform: none; }
+
+/* Pill-Bar Button Look */
+.pill {
+  @apply h-9 px-3 rounded-full inline-flex items-center gap-1 text-sm font-medium
+         text-gray-900 transition border border-black/10 bg-white;
 }
-
-.layer { position: relative; z-index: 1; }
-
-.header-glass {
-  box-shadow: 0 6px 30px rgba(255, 255, 255, 0.06) inset,
-              0 4px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* Tailwind-Komponenten Layer */
-@layer components {
-  .pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5
-           px-4 py-2 text-sm font-medium text-white/90 transition;
-  }
-
-  .pill:hover {
-    @apply bg-white/10 border-white/25;
-  }
-
-  .hero-title {
-    @apply font-black leading-[0.95] tracking-[-0.02em];
-    font-size: clamp(42px, 7vw, 112px);
-  }
-}
+.pill:hover { @apply bg-black text-white; }
+.pill-ghost { @apply h-9 w-9 rounded-full inline-flex items-center justify-center border border-black/10 bg-white; }
+.pill-ghost:hover { @apply bg-black text-white; }

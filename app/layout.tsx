@@ -1,18 +1,15 @@
 import "./globals.css";
-import type { Metadata } from "next";
-import Header from "@/components/Header";
 
-export const metadata: Metadata = {
-  title: "KRÄMER & HOLTHAUSEN – KI-Chatbots",
-  description: "Enterprise-fähige KI-Chatbots für Websites. DSGVO-konform. EU-Hosting.",
+export const metadata = {
+  title: "KRÄMER & HOLTHAUSEN – KI für Unternehmen",
+  description: "Beratung, Entwicklung und Integration von KI-Lösungen.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
-      <body>
-        <Header />
-        <div className="pt-16">{children}</div>
+    <html lang="de" suppressHydrationWarning>
+      <body className="min-h-screen bg-black text-white antialiased">
+        {children}
       </body>
     </html>
   );
