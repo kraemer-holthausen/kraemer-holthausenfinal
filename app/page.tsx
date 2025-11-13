@@ -1,58 +1,71 @@
 "use client";
+import Nav from "../components/NavExxeta";
+import Footer from "../components/Footer";
+import MorphingParticles from "../components/MorphingParticles";
 
-import MorphingParticles from "@/components/MorphingParticles";
-
-export default function Home() {
+export default function Page() {
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* GROßER MORPHING-KREIS – nur ab md sichtbar */}
-      <div className="pointer-events-none hidden md:block">
-        <div className="absolute inset-y-24 right-0 w-[46vw] max-w-[520px] min-w-[320px]">
-          <MorphingParticles />
-        </div>
-      </div>
+      {/* Partikel-Hintergrund */}
+      <MorphingParticles />
 
-      {/* HERO-INHALT */}
-      <section className="relative mx-auto max-w-[1200px] px-4 pt-24 pb-16">
-        {/* Headline – auf Mobile innerhalb, ab md leicht nach links geschoben */}
-        <div className="relative md:-ml-8 lg:-ml-16 xl:-ml-32 2xl:-ml-48">
-          <h1
-            className="
-              font-extrabold leading-[0.95] tracking-tight
-              text-[34px] sm:text-[40px] md:text-[60px] lg:text-[86px] xl:text-[110px]
-            "
-          >
-            Künstliche<br />
-            Intelligenz<br />
-            für dein<br />
-            Unternehmen
-          </h1>
-        </div>
+      {/* Navigation oben */}
+      <Nav />
 
-        {/* Subline */}
-        <p className="mt-6 max-w-[480px] text-white/80 text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed">
-          Produktionsreife KI-Assistenten, die Leads qualifizieren, Termine anstoßen
-          und Support entlasten – sauber integriert in Kalender, CRM &amp; E-Mail.
-        </p>
+      {/* HERO */}
+      <section className="relative z-10">
+        <div className="mx-auto max-w-[1200px] px-4 pt-16 md:pt-20 lg:pt-24 pb-16">
+          {/* Headline-Block: auf Mobile ohne Negativ-Margin, ab md leicht nach links */}
+          <div className="relative md:-ml-6 lg:-ml-12 xl:-ml-20 2xl:-ml-28">
+            <h1 className="font-extrabold leading-[0.96] tracking-[-0.01em]">
+              <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
+                Künstliche
+              </span>
+              <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
+                Intelligenz
+              </span>
+              <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
+                für dein
+              </span>
+              <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
+                Unternehmen
+              </span>
+            </h1>
 
-        {/* Buttons */}
-        <div className="mt-8 flex flex-wrap gap-4">
-          <a
-            href="#kontakt"
-            className="px-7 py-3 rounded-full bg-white text-black font-medium hover:bg-white/90 transition"
-          >
-            Kontakt aufnehmen
-          </a>
+            {/* Subline – skaliert leicht mit */}
+            <p className="mt-6 text-[15px] sm:text-[16px] md:text-[17px] text-white/80 max-w-xl leading-relaxed">
+              Produktionsreife KI-Assistenten, die Leads qualifizieren, Termine anstoßen
+              und Support entlasten – sauber integriert in Kalender, CRM &amp; E-Mail.
+            </p>
 
-          <button className="px-6 py-3 rounded-full border border-white/25 text-white/90 hover:bg-white/10 transition">
-            Infos
-          </button>
+            {/* Buttons */}
+            <div className="mt-8 flex flex-wrap gap-4 sm:gap-6 md:gap-8">
+              <a
+                href="#kontakt"
+                className="h-11 sm:h-12 px-6 sm:px-7 rounded-full bg-white text-black text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center shadow-sm hover:opacity-90 transition"
+              >
+                Kontakt aufnehmen
+              </a>
 
-          <button className="px-6 py-3 rounded-full border border-white/25 text-white/90 hover:bg-white/10 transition">
-            Jetzt sofort live testen
-          </button>
+              <a
+                href="#infos"
+                className="h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/20 text-white/90 text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center hover:bg-white hover:text-black transition"
+              >
+                Infos
+              </a>
+
+              <a
+                href="#live"
+                className="h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/20 text-white/90 text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center hover:bg-white hover:text-black transition"
+              >
+                Jetzt sofort live testen
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
+      <Footer />
     </main>
   );
 }
