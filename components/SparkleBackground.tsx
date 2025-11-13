@@ -48,7 +48,7 @@ export default function SparkleBackground() {
         ctx.globalAlpha = 0.18 + s.z * 0.6;
         ctx.fillRect(px, py, size, size);
 
-        // leichte Bewegung nach unten
+        // leichte Bewegung
         s.y += 0.0007 + s.z * 0.0013;
         if (s.y > 1.1) s.y = -0.1;
       }
