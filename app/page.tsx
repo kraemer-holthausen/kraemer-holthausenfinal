@@ -1,21 +1,23 @@
 "use client";
 import Nav from "../components/NavExxeta";
 import Footer from "../components/Footer";
-import MorphingParticles from "../components/MorphingParticles";
+import SparkleBackground from "../components/SparkleBackground";
 
 export default function Page() {
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* Partikel-Hintergrund */}
-      <MorphingParticles />
+      {/* SPARKLES ÜBER DIE GESAMTE SEITE */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <SparkleBackground />
+      </div>
 
-      {/* Navigation oben */}
+      {/* NAVIGATION */}
       <Nav />
 
       {/* HERO */}
       <section className="relative z-10">
-        <div className="mx-auto max-w-[1200px] px-4 pt-16 md:pt-20 lg:pt-24 pb-16">
-          {/* Headline-Block: auf Mobile ohne Negativ-Margin, ab md leicht nach links */}
+        <div className="mx-auto max-w-[1200px] px-4 pt-10 md:pt-20 lg:pt-24 pb-16">
+          {/* Headline-Block: Mobile gerade, ab md leicht nach links geschoben */}
           <div className="relative md:-ml-6 lg:-ml-12 xl:-ml-20 2xl:-ml-28">
             <h1 className="font-extrabold leading-[0.96] tracking-[-0.01em]">
               <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
@@ -32,10 +34,11 @@ export default function Page() {
               </span>
             </h1>
 
-            {/* Subline – skaliert leicht mit */}
+            {/* Subline */}
             <p className="mt-6 text-[15px] sm:text-[16px] md:text-[17px] text-white/80 max-w-xl leading-relaxed">
-              Produktionsreife KI-Assistenten, die Leads qualifizieren, Termine anstoßen
-              und Support entlasten – sauber integriert in Kalender, CRM &amp; E-Mail.
+              Produktionsreife KI-Assistenten, die Leads qualifizieren, Termine
+              anstoßen und Support entlasten – sauber integriert in Kalender,
+              CRM &amp; E-Mail.
             </p>
 
             {/* Buttons */}
