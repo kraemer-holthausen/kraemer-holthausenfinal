@@ -2,23 +2,305 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Logo – sanft wackeln + Hover-Reveal */
-@keyframes kh-logo-float {
-  0%,100% { transform: translate3d(0,0,0) rotate(0deg); }
-  50%     { transform: translate3d(1.6px,-1.6px,0) rotate(.15deg); }
-}
-.kh-logo__wiggle { animation: kh-logo-float 4.8s ease-in-out infinite; will-change: transform; }
+/* =========================================
+   GLOBALER BASE STYLE
+   ========================================= */
 
-/* Reveal „HOLTHAUSEN“ + Subline nur bei Hover */
-.kh-logo { line-height: .92; font-weight: 800; letter-spacing: .06em; }
-.kh-logo__second, .kh-logo__sub { opacity: 0; transform: translateY(4px); transition: .28s ease; }
-.kh-logo:hover .kh-logo__second, .kh-logo:hover .kh-logo__sub { opacity: 1; transform: none; }
-
-/* Pill-Bar Button Look */
-.pill {
-  @apply h-9 px-3 rounded-full inline-flex items-center gap-1 text-sm font-medium
-         text-gray-900 transition border border-black/10 bg-white;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  background: #ffffff;
+  color: #000000;
+  scroll-behavior: smooth;
 }
-.pill:hover { @apply bg-black text-white; }
-.pill-ghost { @apply h-9 w-9 rounded-full inline-flex items-center justify-center border border-black/10 bg-white; }
-.pill-ghost:hover { @apply bg-black text-white; }
+
+* {
+  box-sizing: border-box;
+}
+
+a,
+button {
+  transition: all 0.2s ease;
+}
+
+/* =========================================
+   NAVIGATION – Schatten
+   ========================================= */
+
+.nav-shadow {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+/* =========================================
+   GROSSER CHAT-STREAM RECHTS
+   ========================================= */
+
+.chat-stream {
+  position: relative;
+  width: 100%;
+  max-width: 560px;       /* etwas größer */
+  min-height: 320px;      /* mehr Höhe, damit nichts gequetscht wird */
+  padding-bottom: 40px;   /* Platz für Tipp-Punkte über dem Label */
+}
+
+/* Jede „Szene“ (Dialog) */
+.chat-sequence {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: chatSequenceCycle 18s ease-in-out infinite;
+  opacity: 0;
+}
+
+/* zeitversetzte Sequenzen – jede bekommt ~6s Slot */
+.chat-sequence-1 {
+  animation-delay: 0s;
+}
+.chat-sequence-2 {
+  animation-delay: 6s;
+}
+.chat-sequence-3 {
+  animation-delay: 12s;
+}
+
+/* Chatblasen – größer, mit sauberem Zeilenumbruch */
+.chat-bubble {
+  max-width: 100%;
+  border-radius: 999px;
+  padding: 14px 22px;
+  font-size: 16px;
+  line-height: 1.45;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: normal; /* Text darf umbrechen */
+}
+
+.chat-bubble-user {
+  align-self: flex-end;
+  background: #000000;
+  color: #ffffff;
+}
+
+.chat-bubble-bot {
+  align-self: flex-start;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+/* Tipp-Status immer unten, etwas weiter weg von den Bubbles */
+.chat-typing {
+  margin-top: auto;
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.04);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+/* Punkte beim Tippen */
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #000000;
+  opacity: 0.3;
+  animation: typingBounce 1.3s infinite;
+}
+
+.typing-dot.dot-2 {
+  animation-delay: 0.15s;
+}
+
+.typing-dot.dot-3 {
+  animation-delay: 0.3s;
+}
+
+/* Label unter dem Chat – weiter unten & minimal größer */
+.chat-label {
+  margin-top: 32px;        /* mehr Abstand nach unten */
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #737373;
+  text-align: left;
+}
+
+/* =========================================
+   ANIMATION: Sequenzen (Dialoge)
+   ========================================= */
+
+@keyframes chatSequenceCycle {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* =========================================
+   ANIMATION: Einzeln einfliegende Nachrichten
+   ========================================= */
+
+/* Grund-Setup für jede Nachricht –
+   Name der Animation wird pro Seite (links/rechts) überschrieben */
+.chat-msg {
+  opacity: 0;
+  transform: translateY(6px);
+  animation-duration: 18s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* User-Bubbles (rechts) – von rechts reinfliegen */
+.chat-bubble-user.chat-msg {
+  animation-name: chatMessageInRight;
+}
+
+/* Bot-Bubbles (links) – von links reinfliegen */
+.chat-bubble-bot.chat-msg {
+  animation-name: chatMessageInLeft;
+}
+
+/* von rechts */
+@keyframes chatMessageInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* von links */
+@keyframes chatMessageInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===== Delays für jede einzelne Nachricht ===== */
+/* Sequenz 1 – läuft im Slot 0–6s, klarer Abstand zwischen Messages */
+
+.chat-sequence-1 .seq1-msg1 {
+  animation-delay: 0.4s;
+}
+.chat-sequence-1 .seq1-msg2 {
+  animation-delay: 2.1s;
+}
+.chat-sequence-1 .seq1-msg3 {
+  animation-delay: 3.8s;
+}
+.chat-sequence-1 .seq1-msg4 {
+  animation-delay: 5.2s;
+}
+.chat-sequence-1 .seq1-typing {
+  animation-name: typingBounceWrapper;
+  animation-delay: 5.8s;
+}
+
+/* Sequenz 2 – Slot 6–12s */
+
+.chat-sequence-2 .seq2-msg1 {
+  animation-delay: 6.4s;
+}
+.chat-sequence-2 .seq2-msg2 {
+  animation-delay: 8.1s;
+}
+.chat-sequence-2 .seq2-msg3 {
+  animation-delay: 9.8s;
+}
+.chat-sequence-2 .seq2-msg4 {
+  animation-delay: 11.2s;
+}
+.chat-sequence-2 .seq2-typing {
+  animation-name: typingBounceWrapper;
+  animation-delay: 11.8s;
+}
+
+/* Sequenz 3 – Slot 12–18s */
+
+.chat-sequence-3 .seq3-msg1 {
+  animation-delay: 12.4s;
+}
+.chat-sequence-3 .seq3-msg2 {
+  animation-delay: 14.1s;
+}
+.chat-sequence-3 .seq3-msg3 {
+  animation-delay: 15.8s;
+}
+.chat-sequence-3 .seq3-msg4 {
+  animation-delay: 17.2s;
+}
+.chat-sequence-3 .seq3-typing {
+  animation-name: typingBounceWrapper;
+  animation-delay: 17.8s;
+}
+
+/* Wrapper-Keyframe, damit das Typing-Element im richtigen Slot sichtbar ist */
+@keyframes typingBounceWrapper {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Tipp-Punkte Animation */
+@keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.3;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}

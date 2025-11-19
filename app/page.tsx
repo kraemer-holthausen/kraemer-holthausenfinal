@@ -1,82 +1,130 @@
-"use client";
-import Nav from "../components/NavExxeta";
-import Footer from "../components/Footer";
-import SparkleBackground from "../components/SparkleBackground";
-import MorphingParticles from "../components/MorphingParticles";
+// app/page.tsx
+import NavExxeta from "@/components/NavExxeta";
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-black text-white overflow-hidden">
-      {/* SPARKLES IM HINTERGRUND */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <SparkleBackground />
-      </div>
+    <div className="min-h-screen bg-white text-black">
+      <NavExxeta />
 
-      {/* NAVIGATION */}
-      <Nav />
+      {/* Hero-Bereich – nimmt fast den ganzen Screen ein */}
+      <main className="mx-auto max-w-6xl lg:max-w-7xl px-6 md:px-10 pt-24 pb-24 min-h-[calc(100vh-140px)] flex items-center">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-24 items-center w-full">
+          {/* LINKER BLOCK – große Headline */}
+          <div>
+            <h1
+              className="
+              text-[44px]
+              sm:text-[60px]
+              lg:text-[88px]
+              xl:text-[96px]
+              font-semibold
+              leading-[1.02]
+              tracking-tight
+            "
+            >
+              Künstliche Intelligenz
+              <br />
+              für dein Unternehmen
+            </h1>
 
-      {/* HERO-BEREICH */}
-      <section className="relative z-10">
-        <div className="mx-auto max-w-[1200px] px-4 pt-6 md:pt-20 lg:pt-24 pb-16">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-16">
-            {/* LINKER BLOCK – HEADLINE + TEXT + BUTTONS */}
-            <div className="relative w-full lg:max-w-[620px]">
-              <h1 className="font-extrabold leading-[0.96] tracking-[-0.01em]">
-                <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
-                  Künstliche
-                </span>
-                <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
-                  Intelligenz
-                </span>
-                <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
-                  für dein
-                </span>
-                <span className="block text-[34px] sm:text-[40px] md:text-[64px] lg:text-[80px] xl:text-[96px]">
-                  Unternehmen
-                </span>
-              </h1>
+            <p className="mt-8 text-lg sm:text-xl text-neutral-700 max-w-2xl leading-relaxed">
+              Wir entwickeln produktionsreife KI-Assistenten, die Anfragen
+              verstehen, Antworten formulieren und Prozesse automatisiert
+              anstoßen – vom ersten Kontakt bis zur Terminbuchung. Sauber
+              integriert in Kalender, CRM & bestehende Systeme.
+            </p>
 
-              <p className="mt-6 text-[15px] sm:text-[16px] md:text-[17px] text-white/80 max-w-xl leading-relaxed">
-                Produktionsreife KI-Assistenten, die Leads qualifizieren,
-                Termine anstoßen und Support entlasten – sauber integriert in
-                Kalender, CRM &amp; E-Mail.
-              </p>
-
-              <div className="mt-8 flex flex-wrap gap-4 sm:gap-6 md:gap-8">
-                <a
-                  href="#kontakt"
-                  className="h-11 sm:h-12 px-6 sm:px-7 rounded-full bg-white text-black text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center shadow-sm hover:opacity-90 transition"
-                >
-                  Kontakt aufnehmen
-                </a>
-
-                <a
-                  href="#infos"
-                  className="h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/20 text-white/90 text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center hover:bg-white hover:text-black transition"
-                >
-                  Infos
-                </a>
-
-                <a
-                  href="#live"
-                  className="h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/20 text-white/90 text-[14px] sm:text-[15px] font-medium inline-flex items-center justify-center hover:bg-white hover:text-black transition"
-                >
-                  Jetzt sofort live testen
-                </a>
-              </div>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <button className="rounded-full bg-black text-white px-9 py-3 text-sm sm:text-base font-semibold shadow hover:bg-neutral-800 transition">
+                Jetzt live testen
+              </button>
+              <button className="rounded-full border border-black px-9 py-3 text-sm sm:text-base font-semibold hover:bg-black hover:text-white transition">
+                Kontakt aufnehmen
+              </button>
             </div>
+          </div>
 
-            {/* RECHTS – MORPHING SYMBOL (Logo-Form, Chat-Icon etc.) */}
-            <div className="w-full lg:flex-1 flex justify-center lg:justify-end">
-              <div className="relative w-[240px] h-[240px] sm:w-[280px] sm:h-[280px] md:w-[320px] md:h-[320px] lg:w-[360px] lg:h-[360px]">
-                <MorphingParticles />
+          {/* RECHTS – laufender Chat mit sequenziellen Nachrichten */}
+          <div className="flex justify-center md:justify-end">
+            <div>
+              <div className="chat-stream">
+                {/* SEQUENCE 1 – Terminbuchung */}
+                <div className="chat-sequence chat-sequence-1">
+                  <div className="chat-bubble chat-bubble-user chat-msg seq1-msg1">
+                    Nutzer: „Können wir morgen einen Termin buchen?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq1-msg2">
+                    Bot: „Gerne! 10:30 Uhr oder 14:00 Uhr?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-user chat-msg seq1-msg3">
+                    Nutzer: „14:00 Uhr passt perfekt.“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq1-msg4">
+                    Bot: „Super, der Termin um 14:00 Uhr ist eingetragen.“
+                  </div>
+
+                  <div className="chat-typing chat-msg seq1-typing">
+                    <span className="typing-dot dot-1" />
+                    <span className="typing-dot dot-2" />
+                    <span className="typing-dot dot-3" />
+                  </div>
+                </div>
+
+                {/* SEQUENCE 2 – Info zu Services */}
+                <div className="chat-sequence chat-sequence-2">
+                  <div className="chat-bubble chat-bubble-user chat-msg seq2-msg1">
+                    Nutzer: „Was kann euer KI-Assistent genau?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq2-msg2">
+                    Bot: „Er beantwortet Anfragen, qualifiziert Leads
+                    und bucht automatisch Termine.“
+                  </div>
+                  <div className="chat-bubble chat-bubble-user chat-msg seq2-msg3">
+                    Nutzer: „Funktioniert das auch mit meinem CRM?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq2-msg4">
+                    Bot: „Ja – wir integrieren ihn in deine bestehenden
+                    Systeme.“
+                  </div>
+
+                  <div className="chat-typing chat-msg seq2-typing">
+                    <span className="typing-dot dot-1" />
+                    <span className="typing-dot dot-2" />
+                    <span className="typing-dot dot-3" />
+                  </div>
+                </div>
+
+                {/* SEQUENCE 3 – Projektstart */}
+                <div className="chat-sequence chat-sequence-3">
+                  <div className="chat-bubble chat-bubble-user chat-msg seq3-msg1">
+                    Nutzer: „Wie schnell könnt ihr starten?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq3-msg2">
+                    Bot: „Ein erstes KI-Pilotprojekt ist in wenigen
+                    Wochen live – inklusive Training & Testing.“
+                  </div>
+                  <div className="chat-bubble chat-bubble-user chat-msg seq3-msg3">
+                    Nutzer: „Können wir dazu einen Call machen?“
+                  </div>
+                  <div className="chat-bubble chat-bubble-bot chat-msg seq3-msg4">
+                    Bot: „Klar – ich schicke dir direkt drei Terminvorschläge.“
+                  </div>
+
+                  <div className="chat-typing chat-msg seq3-typing">
+                    <span className="typing-dot dot-1" />
+                    <span className="typing-dot dot-2" />
+                    <span className="typing-dot dot-3" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="chat-label">
+                KI-Chat, der Termine bucht & Fragen beantwortet
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <Footer />
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }

@@ -1,16 +1,17 @@
+// app/layout.tsx
 import "./globals.css";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "KRÄMER & HOLTHAUSEN – KI für Unternehmen",
-  description: "Beratung, Entwicklung und Integration von KI-Lösungen.",
+  description: "Strategie, Beratung & KI-Lösungen für Unternehmen.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="de" suppressHydrationWarning>
-      <body className="min-h-screen bg-black text-white antialiased">
-        {children}
-      </body>
+    <html lang="de">
+      <body className="bg-white text-black">{children}</body>
     </html>
   );
 }
